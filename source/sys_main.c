@@ -55,6 +55,7 @@
 #include "sys_core.h"
 #include "drivers/Encoder.h"
 #include "drivers/MPU9250.h"
+#include "drivers/PWM.h"
 /* USER CODE END */
 
 /* Include Files */
@@ -62,6 +63,8 @@
 #include "sys_common.h"
 
 /* USER CODE BEGIN (1) */
+hetSIGNAL_t STABILIZER;
+#define STAB_PWM    pwm0
 /* USER CODE END */
 
 /** @fn void main(void)
@@ -75,6 +78,7 @@
 /* USER CODE BEGIN (2) */
 void vEncoder(void *pvParameters);
 void vMPU(void *pvParameters);
+void vServo(void *pvParameters);
 
 char command[50];
 /* USER CODE END */
@@ -89,6 +93,8 @@ int main(void)
     sciInit();
 
     xTaskCreate(vMPU, "MPU9250", 512, NULL, 1, NULL);
+    xTaskCreate(vServo, "Servo",128, NULL, 1, NULL);
+//    xTaskCreate(vEncoder,"Encoder",512,NULL, 1, NULL);
 
     vTaskStartScheduler();
 
@@ -124,6 +130,23 @@ void vMPU(void *pvParameters)
         sciSend(scilinREG, sprintf(command,"%d ",Magnet[0]), (uint8*)command);
         sciSend(scilinREG, sprintf(command,"%d ",Magnet[1]), (uint8*)command);
         sciSend(scilinREG, sprintf(command,"%d\n\r",Magnet[2]), (uint8*)command);
+        vTaskDelay(500/portTICK_RATE_MS);
+    }
+}
+void vServo(void *pvParameters)
+{
+    STABILIZER.period = 20000;
+    while(1)
+    {
+        if(gioGetBit(gioPORTA, 7))
+        {
+            STABILIZER.duty = 900;
+        }
+        else
+        {
+            STABILIZER.duty = 750;
+        }
+        pwmSetSignal10e3(hetRAM1, STAB_PWM, STABILIZER);
         vTaskDelay(500/portTICK_RATE_MS);
     }
 }

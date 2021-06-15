@@ -3,6 +3,9 @@
  *
  *  Created on: 07/05/2021
  *      Author: Enrique
+ *
+ *      IMPORTANTE: El cabelado del sensor debe estar bien trenzado para que
+ *      el magnetometro funcione correctamente
  */
 
 #include "MPU9250.h"
