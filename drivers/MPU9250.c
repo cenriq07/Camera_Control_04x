@@ -78,14 +78,6 @@ boolean mpuGetMagnetometer(spiBASE_t *spiREGISTRO, spiDAT1_t *SPIconfig, int16_t
         SPITMP = ( ( (AK8963RdO[1] & 0xFF)<<8) | SPITMP);
         ReadOut[0] = (int32_t)((int16_t) SPITMP);
 
-//        mX = (ReadOut[0]-vX)/B;
-
-#ifndef ME
-            sciEnviarDatos(sprintf(command,"%d,",ReadOut[0] ),command, 0);
-#else
-            sciEnviarDatos(sprintf(command,"%.2f,",mX ),command, 0);
-#endif
-
 
         read_AK8963(spiREGISTRO, SPIconfig, MPU_AK8963_HYL, AK8963RdO+2);
         //sciEnviarDatos(sprintf(command,"MyL=  %X ",AK8963ReadOut[2] ),command, 0);
@@ -95,14 +87,6 @@ boolean mpuGetMagnetometer(spiBASE_t *spiREGISTRO, spiDAT1_t *SPIconfig, int16_t
         SPITMP = ( ( (AK8963RdO[3] & 0xFF)<<8) | SPITMP);
         ReadOut[1] = (int32_t)((int16_t) SPITMP);
 //            sciEnviarDatos(sprintf(command,"    My= %d",MAGN_Sensout[1] ),command, 0);
-
-//        mY = (ReadOut[1]-vY)/B;
-
-#ifndef ME
-            sciEnviarDatos(sprintf(command,"%d,",ReadOut[1] ),command, 0);
-#else
-            sciEnviarDatos(sprintf(command,"%.2f,",mY ),command, 0);
-#endif
 
 
         read_AK8963(spiREGISTRO, SPIconfig, MPU_AK8963_HZL, AK8963RdO+4);
@@ -114,23 +98,8 @@ boolean mpuGetMagnetometer(spiBASE_t *spiREGISTRO, spiDAT1_t *SPIconfig, int16_t
         ReadOut[2] = (int32_t)((int16_t) SPITMP);
 //            sciEnviarDatos(sprintf(command,"    Mz= %d",MAGN_Sensout[2] ),command, 0);
 
-//        mZ = (ReadOut[2]-vZ)/B;
-
-#ifndef ME
-            sciEnviarDatos(sprintf(command,"%d",ReadOut[2] ),command, 1);
-#else
-            sciEnviarDatos(sprintf(command,"%.2f,",mZ ),command, 0);
-#endif
-
         read_AK8963(spiREGISTRO, SPIconfig, MPU_AK8963_TS2, AK8963ReadOut+6);
 //            sciEnviarDatos(sprintf(command,"    M_ST2= %X",AK8963ReadOut[6] ),command, 1);
-#ifdef ME
-        float ang = atan2(-mY,mX)*180/3.14159;
-        if (ang < 0)
-            ang += 360;
-
-        sciEnviarDatos(sprintf(command,"\t%.2f",ang),command, 1);
-#endif
 
         return(0);
         // ***********************************

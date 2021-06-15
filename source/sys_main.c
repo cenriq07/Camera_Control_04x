@@ -53,6 +53,7 @@
 #include "het.h"
 #include "adc.h"
 #include "sys_core.h"
+#include "math.h"
 #include "drivers/Encoder.h"
 #include "drivers/MPU9250.h"
 #include "drivers/PWM.h"
@@ -93,7 +94,7 @@ int main(void)
     sciInit();
 
     xTaskCreate(vMPU, "MPU9250", 512, NULL, 1, NULL);
-    xTaskCreate(vServo, "Servo",128, NULL, 1, NULL);
+//    xTaskCreate(vServo, "Servo",128, NULL, 1, NULL);
 //    xTaskCreate(vEncoder,"Encoder",512,NULL, 1, NULL);
 
     vTaskStartScheduler();
@@ -112,7 +113,7 @@ void vEncoder(void *pvParameters)
 {
     while(1)
     {
-        sciSend(scilinREG, sprintf(command,"%.2f\r\n", EncoderRead()), (uint8*)command);
+        sciSend(scilinREG, sprintf(command,"%.2f°\r\n", EncoderRead()), (uint8*)command);
         vTaskDelay(500/portTICK_RATE_MS);
     }
 }
@@ -120,17 +121,34 @@ void vMPU(void *pvParameters)
 {
     MPUInit();
 
+    enum axis
+    {
+        X,Y,Z
+    };
+
     int32_t Gyro[3] = {0,0,0};
     int32_t Accel[3] = {0,0,0};
     int16_t Magnet[3] = {0,0,0};
 
+    float mX=0.0, mY=0.0, mZ=0.0;
+    float Bf = 0.0;     //  rad
+
     while(1)
     {
         mpuGetMagnetometer(spiREG1, &SPI1_data_configCh0, Magnet);
-        sciSend(scilinREG, sprintf(command,"%d ",Magnet[0]), (uint8*)command);
-        sciSend(scilinREG, sprintf(command,"%d ",Magnet[1]), (uint8*)command);
-        sciSend(scilinREG, sprintf(command,"%d\n\r",Magnet[2]), (uint8*)command);
-        vTaskDelay(500/portTICK_RATE_MS);
+
+        mX = (Magnet[X]-vX)/B;
+        mY = (Magnet[Y]-vY)/B;
+
+        Bf = (atan2((-1)*mY,mX))*180/3.14159;
+
+        float mNorth = Bf;
+        if (mNorth < 0)
+            mNorth += 360;
+
+        sciSend(scilinREG, sprintf(command,"N:%.2f°\r\n", mNorth), (uint8*)command);
+
+        vTaskDelay(50/portTICK_RATE_MS);
     }
 }
 void vServo(void *pvParameters)
@@ -147,7 +165,8 @@ void vServo(void *pvParameters)
             STABILIZER.duty = 750;
         }
         pwmSetSignal10e3(hetRAM1, STAB_PWM, STABILIZER);
-        vTaskDelay(500/portTICK_RATE_MS);
+        vTaskDelay(1000/portTICK_RATE_MS);
     }
 }
 /* USER CODE END */
+

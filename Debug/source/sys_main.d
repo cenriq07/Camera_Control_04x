@@ -38,11 +38,11 @@ source/sys_main.obj: C:/ti/ccs930/ccs/tools/compiler/ti-cgt-arm_18.12.4.LTS/incl
 source/sys_main.obj: C:/Users/ADMIN/workspace_v9/Camera_Control_04x/include/adc.h
 source/sys_main.obj: C:/Users/ADMIN/workspace_v9/Camera_Control_04x/include/reg_adc.h
 source/sys_main.obj: C:/Users/ADMIN/workspace_v9/Camera_Control_04x/include/sys_core.h
-source/sys_main.obj: C:/Users/ADMIN/workspace_v9/Camera_Control_04x/drivers/Encoder.h
-source/sys_main.obj: C:/Users/ADMIN/workspace_v9/Camera_Control_04x/drivers/MPU9250.h
 source/sys_main.obj: C:/ti/ccs930/ccs/tools/compiler/ti-cgt-arm_18.12.4.LTS/include/math.h
 source/sys_main.obj: C:/ti/ccs930/ccs/tools/compiler/ti-cgt-arm_18.12.4.LTS/include/_defs.h
 source/sys_main.obj: C:/ti/ccs930/ccs/tools/compiler/ti-cgt-arm_18.12.4.LTS/include/machine/_limits.h
+source/sys_main.obj: C:/Users/ADMIN/workspace_v9/Camera_Control_04x/drivers/Encoder.h
+source/sys_main.obj: C:/Users/ADMIN/workspace_v9/Camera_Control_04x/drivers/MPU9250.h
 source/sys_main.obj: C:/ti/ccs930/ccs/tools/compiler/ti-cgt-arm_18.12.4.LTS/include/stdlib.h
 source/sys_main.obj: C:/Users/ADMIN/workspace_v9/Camera_Control_04x/drivers/PWM.h
 source/sys_main.obj: C:/Users/ADMIN/workspace_v9/Camera_Control_04x/include/esm.h
@@ -86,11 +86,11 @@ C:/ti/ccs930/ccs/tools/compiler/ti-cgt-arm_18.12.4.LTS/include/string.h:
 C:/Users/ADMIN/workspace_v9/Camera_Control_04x/include/adc.h: 
 C:/Users/ADMIN/workspace_v9/Camera_Control_04x/include/reg_adc.h: 
 C:/Users/ADMIN/workspace_v9/Camera_Control_04x/include/sys_core.h: 
-C:/Users/ADMIN/workspace_v9/Camera_Control_04x/drivers/Encoder.h: 
-C:/Users/ADMIN/workspace_v9/Camera_Control_04x/drivers/MPU9250.h: 
 C:/ti/ccs930/ccs/tools/compiler/ti-cgt-arm_18.12.4.LTS/include/math.h: 
 C:/ti/ccs930/ccs/tools/compiler/ti-cgt-arm_18.12.4.LTS/include/_defs.h: 
 C:/ti/ccs930/ccs/tools/compiler/ti-cgt-arm_18.12.4.LTS/include/machine/_limits.h: 
+C:/Users/ADMIN/workspace_v9/Camera_Control_04x/drivers/Encoder.h: 
+C:/Users/ADMIN/workspace_v9/Camera_Control_04x/drivers/MPU9250.h: 
 C:/ti/ccs930/ccs/tools/compiler/ti-cgt-arm_18.12.4.LTS/include/stdlib.h: 
 C:/Users/ADMIN/workspace_v9/Camera_Control_04x/drivers/PWM.h: 
 C:/Users/ADMIN/workspace_v9/Camera_Control_04x/include/esm.h: 

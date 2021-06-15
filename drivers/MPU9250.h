@@ -163,6 +163,11 @@ enum{
     X,Y,Z
 };
 
+#define vX  -169.86
+#define vY  420.65
+#define vZ  147.33
+#define B   99.951
+
 void MPUInit();
 void wait(unsigned int id);
 bool sciEnviarDatos(uint8 numOfDat, char * charDat, bool sc);
@@ -184,3 +189,4 @@ boolean read_MPU_ACEL_TMP_VF(spiBASE_t *spiREGISTRO, spiDAT1_t *SPIconfig, int *
 boolean mpuGetGyroAccel(spiBASE_t *spiREGISTRO, spiDAT1_t *SPIconfig, int *Gyro, int *Accel);
 
 #endif /* INCLUDE_MPU9250_H_ */
+
