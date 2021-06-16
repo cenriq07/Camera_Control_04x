@@ -4,7 +4,7 @@
 <stringAttribute key="com.ti.ccstudio.debug.debugModel.ATTR_PROGRAM.TMS570LS043x.ccxml.Texas Instruments XDS100v2 USB Debug Probe/CortexR4" value="${build_artifact:Camera_Control_04x}"/>
 <stringAttribute key="com.ti.ccstudio.debug.debugModel.ATTR_PROJECT.TMS570LS043x.ccxml.Texas Instruments XDS100v2 USB Debug Probe/CortexR4" value="Camera_Control_04x"/>
 <stringAttribute key="com.ti.ccstudio.debug.debugModel.ATTR_TARGET_CONFIG" value="${target_config_active_default:Camera_Control_04x}"/>
-<stringAttribute key="com.ti.ccstudio.debug.debugModel.MRU_PROGRAM.TMS570LS043x.ccxml.Texas Instruments XDS100v2 USB Debug Probe/CortexR4" value="C:/Users\ADMIN\workspace_v9\Camera_Control_04x\Debug\Camera_Control_04x.out"/>
+<stringAttribute key="com.ti.ccstudio.debug.debugModel.MRU_PROGRAM.TMS570LS043x.ccxml.Texas Instruments XDS100v2 USB Debug Probe/CortexR4" value="C:\Users\alex\Desktop\Camera_Control_04x\Debug\Camera_Control_04x.out"/>
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
 <listEntry value="/Camera_Control_04x"/>
 </listAttribute>

@@ -4,15 +4,21 @@
 #include "FreeRTOS.h"
 #include "os_task.h"
 
+static int INIT = 0;
+
 static spiDAT1_t SPI3_data_configCh0;
 static uint16 DatoSPI03[4] = {0x0, 0x0, 0x0, 0x0};
 static uint16 CmmdSPI03[4] = {0x0, 0x0, 0x0, 0x0};
 
 void EncoderInit() {
-    SPI3_data_configCh0.CS_HOLD=FALSE;
-    SPI3_data_configCh0.WDEL=TRUE;
-    SPI3_data_configCh0.DFSEL=SPI_FMT_0;
-    SPI3_data_configCh0.CSNR=SPI_CS_0;
+    if (INIT == 0) {
+        SPI3_data_configCh0.CS_HOLD=FALSE;
+        SPI3_data_configCh0.WDEL=TRUE;
+        SPI3_data_configCh0.DFSEL=SPI_FMT_0;
+        SPI3_data_configCh0.CSNR=SPI_CS_0;
+
+        INIT = 1;
+    }
 }
 
 float EncoderRead() {
@@ -22,6 +28,8 @@ float EncoderRead() {
 
     int16_t high = DatoSPI03[0] >> 6;
     int16_t lowd = DatoSPI03[0] && 0x003F;
+
+    vTaskDelay(1 /portTICK_RATE_MS);
 
     return high * 360 / 1024.0;
 }
